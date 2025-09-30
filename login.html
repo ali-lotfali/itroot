@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود ادمین</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login-container" style="max-width:400px;margin:80px auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;color:#0f3c4e;margin-bottom:20px;">ورود ادمین</h2>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="نام کاربری" required>
+    <input type="password" id="password" placeholder="رمز عبور" required>
+    <button type="submit">ورود</button>
+  </form>
+  <p id="login-error" style="color:red;text-align:center;display:none;margin-top:10px;">نام کاربری یا رمز عبور اشتباه است!</p>
+</div>
+
+<script>
+const loginForm = document.getElementById("login-form");
+loginForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  // ورود شبیه‌سازی شده، بعدا با Supabase Auth جایگزین کنید
+  if(username === "admin" && password === "1234"){
+    localStorage.setItem("isAdmin","true");
+    window.location.href = "index.html"; // برگشت به سایت
+  }else{
+    document.getElementById("login-error").style.display="block";
+  }
+});
+</script>
+</body>
+</html>
