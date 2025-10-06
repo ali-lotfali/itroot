@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما - خدمات کامپیوتری</title>
+    <meta name="description" content="تماس با متخصصان خدمات کامپیوتری - پشتیبانی شبکه، امنیت اطلاعات، تعمیرات کامپیوتر">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- نوار بالایی -->
+     <div id="header-placeholder"></div>
+
+    <!-- بخش اصلی -->
+    <main>
+        <!-- هیرو -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>تماس با متخصصان IT</h1>
+                    <p>آماده پاسخگویی به سوالات و دریافت درخواست خدمات شما هستیم</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- اطلاعات تماس -->
+        <section class="contact-info">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <h3>تلفن تماس</h3>
+                        <p>۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <span>شنبه تا چهارشنبه ۸:۰۰-۱۷:۰۰</span>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h3>واتساپ</h3>
+                        <p>۰۹۱۲۱۲۳۴۵۶۷</p>
+                        <span>پاسخگویی ۲۴ ساعته</span>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>ایمیل</h3>
+                        <p>info@itservice.ir</p>
+                        <span>پاسخ در حداکثر ۲ ساعت</span>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">🏢</div>
+                        <h3>آدرس</h3>
+                        <p>تهران، خیابان ولیعصر</p>
+                        <span>پلاک ۱۲۳۴، طبقه ۲</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- فرم تماس -->
+        <section class="contact-form-section">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>درخواست خدمات یا مشاوره</h2>
+                        <p>فرم زیر را پر کنید تا در سریع‌ترین زمان با شما تماس بگیریم</p>
+                    </div>
+                    
+                    <form class="contact-form" id="serviceRequestForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">نام و نام خانوادگی *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">نام شرکت</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">شماره تماس *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">ایمیل</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">نوع خدمت مورد نیاز *</label>
+                            <select id="service" name="service" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="network">پشتیبانی شبکه</option>
+                                <option value="internet">خدمات اینترنت</option>
+                                <option value="security">امنیت اطلاعات</option>
+                                <option value="hardware">تعمیرات سخت‌افزار</option>
+                                <option value="software">نرم‌افزارهای اداری</option>
+                                <option value="consulting">مشاوره IT</option>
+                                <option value="other">سایر</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="urgency">میزان فوریت</label>
+                            <select id="urgency" name="urgency">
+                                <option value="low">کم (طی ۳ روز)</option>
+                                <option value="medium">متوسط (طی ۲۴ ساعت)</option>
+                                <option value="high">زیاد (فوری)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">توضیح مشکل یا درخواست *</label>
+                            <textarea id="message" name="message" rows="5" placeholder="لطفاً مشکل یا نیاز خود را به طور کامل شرح دهید..." required></textarea>
+                        </div>
+                        
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary">ارسال درخواست</button>
+                            <p class="form-note">پس از ارسال، همکاران ما حداکثر طی ۲ ساعت با شما تماس خواهند گرفت</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- سوالات متداول -->
+        <section class="faq">
+            <div class="container">
+                <h2>سوالات متداول</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>⏱️ زمان پاسخگویی چقدر است؟</h4>
+                        <p>درخواست‌های فوری: حداکثر ۲ ساعت<br>درخواست‌های معمولی: طی ۲۴ ساعت کاری</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>💰 چگونه از قیمت خدمات مطلع شوم؟</h4>
+                        <p>پس از بررسی درخواست شما، پیش‌فاکتور دقیق و شفاف ارسال می‌شود</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>🛡️ خدمات دارای گارانتی هستند؟</h4>
+                        <p>بله، تمامی خدمات ۳۰ روز گارانتی و پشتیبانی رایگان دارند</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>🌍 آیا خدمات در تمام تهران ارائه می‌شود؟</h4>
+                        <p>بله، به تمام مناطق تهران و حومه سرویس‌دهی می‌کنیم</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta">
+            <div class="container">
+                <h2>همین حالا با ما تماس بگیرید</h2>
+                <p>متخصصان ما آماده ارائه مشاوره رایگان و خدمات حرفه‌ای هستند</p>
+                <div class="cta-buttons">
+                    <a href="tel:02112345678" class="btn btn-primary">📞 تماس تلفنی</a>
+                    <a href="https://wa.me/989121234567" class="btn btn-secondary" target="_blank">📱 ارتباط در واتساپ</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/include.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
