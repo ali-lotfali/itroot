@@ -47,4 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // کنسول لاگ برای توسعه‌دهندگان
     console.log('سایت خدمات کامپیوتری با موفقیت لود شد 🚀');
+
+    // آدرس واقعی Worker خودتان را اینجا قرار دهید
+    const WORKER_URL = 'https://contact-form-handler.ali-ir-th.workers.dev';
+
 });
