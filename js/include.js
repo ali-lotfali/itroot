@@ -289,6 +289,34 @@ function initFooterScripts() {
     });
     
     console.log(`✅ ${contactItems.length} contact items animated`);
+
+
+    // 🔴 🔴 🔴 کد جدید: اضافه کردن آمار به فوتر 🔴 🔴 🔴
+    function addStatsToFooter() {
+        const footerStats = document.createElement('div');
+        footerStats.innerHTML = `
+            <div style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+                <h4 style="margin-bottom: 15px; color: #fff; opacity: 0.9;">📊 آمار بازدید itroot</h4>
+                <iframe src="https://visit-counter.ali-ir-th.workers.dev?page=footer" 
+                        width="280" height="240"
+                        style="border: none; border-radius: 10px; display: inline-block;">
+                </iframe>
+            </div>
+        `;
+        
+        // پیدا کردن فوتر و اضافه کردن آمار به انتهای آن
+        const footer = document.querySelector('footer') || document.getElementById('footer-placeholder');
+        if (footer) {
+            footer.appendChild(footerStats);
+            console.log('✅ آمار به فوتر اضافه شد');
+        } else {
+            console.log('❌ فوتر پیدا نشد');
+        }
+    }
+    
+    // اجرای تابع بعد از لود کامل صفحه
+    setTimeout(addStatsToFooter, 500);
+    // 🔴 🔴 🔴 پایان کد جدید 🔴 🔴 🔴
 }
 
 // لودر صفحه
@@ -625,5 +653,6 @@ body.menu-open {
 const style = document.createElement('style');
 style.textContent = headerFooterCSS;
 document.head.appendChild(style);
+
 
 console.log('✅ Header and Footer system ready!');
