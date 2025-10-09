@@ -165,15 +165,63 @@ const footerHTML = `
                 </div>
                 
 
-                <!-- بخش آمار -->
-    <div class="footer-stats" style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid #eee;">
-        <h4 style="margin-bottom: 15px; color: #666;">📊 آمار بازدید itroot</h4>
-        <iframe src="https://visit-counter.ali-ir-th.workers.dev?page=footer" 
-                width="280" height="240"
-                style="border: none; border-radius: 10px; display: inline-block;">
-        </iframe>
+                <!-- بخش آمار ------------------------------------------------------------------------------------------------------>
+   <!-- بخش آمار -->
+<div class="footer-stats" style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid #eee;">
+    <h4 style="margin-bottom: 15px; color: #666;">📊 آمار بازدید itroot</h4>
+    <div id="stats-container">
+        <!-- آمار اینجا با JavaScript لود می‌شود -->
+        <div style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 260px;
+            margin: 0 auto;
+            text-align: center;
+        ">
+            <div style="font-weight: bold; margin-bottom: 10px;">📊 در حال بارگذاری...</div>
+            <div style="font-size: 0.9rem;">آمار بازدید itroot</div>
+        </div>
     </div>
+</div>
 
+<script>
+// کد JavaScript برای لود آمار
+function loadStats() {
+    fetch('https://visit-counter.ali-ir-th.workers.dev?page=footer')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('stats-container').innerHTML = html;
+        })
+        .catch(error => {
+            document.getElementById('stats-container').innerHTML = `
+                <div style="
+                    background: #f8f9fa;
+                    color: #666;
+                    padding: 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                    max-width: 260px;
+                    margin: 0 auto;
+                    border: 1px solid #ddd;
+                ">
+                    <div>📊 آمار itroot</div>
+                    <div style="font-size: 0.9rem; margin-top: 10px;">سیستم آمار</div>
+                </div>
+            `;
+        });
+}
+
+// اجرا بعد از لود صفحه
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadStats);
+} else {
+    loadStats();
+}
+</script>
+ر
+  <!-- بخش آمار ------------------------------------------------------------------------------------------------------>
                
             </div>
         </div>
@@ -646,6 +694,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
