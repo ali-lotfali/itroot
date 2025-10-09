@@ -160,6 +160,18 @@ const footerHTML = `
                     <div class="hours-item">
                         <span>پنجشنبه:</span>
                         <span>۸:۰۰ - ۱۴:۰۰</span>
+
+<!-- بخش آمار -->
+    <div class="footer-stats" style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid #eee;">
+        <h4 style="margin-bottom: 15px; color: #666;">📊 آمار بازدید itroot</h4>
+        <iframe src="https://visit-counter.ali-ir-th.workers.dev?page=footer" 
+                width="280" height="240"
+                style="border: none; border-radius: 10px; display: inline-block;">
+        </iframe>
+    </div>
+
+
+                        
                     </div>
                 </div>
             </div>
@@ -633,6 +645,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
