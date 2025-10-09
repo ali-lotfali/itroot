@@ -318,6 +318,44 @@ function initFooterScripts() {
 
     
     console.log(`✅ ${contactItems.length} contact items animated`);
+
+
+
+    // 🔴 کد جدید با timing متفاوت
+    function addStatsToFooter() {
+        console.log('🔄 Adding stats to footer...');
+        
+        const footerStats = document.createElement('div');
+        footerStats.innerHTML = `
+            <div style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+                <h4 style="margin-bottom: 15px; color: #fff; opacity: 0.9;">📊 آمار بازدید itroot</h4>
+                <iframe src="https://visit-counter.ali-ir-th.workers.dev?page=footer" 
+                        width="280" height="240"
+                        style="border: none; border-radius: 10px; display: inline-block;"
+                        onload="console.log('✅ iframe loaded')"
+                        onerror="console.log('❌ iframe error')">
+                </iframe>
+            </div>
+        `;
+        
+        const footer = document.querySelector('footer') || document.getElementById('footer-placeholder');
+        if (footer) {
+            console.log('✅ Footer found:', footer);
+            footer.appendChild(footerStats);
+            console.log('✅ Stats added to footer');
+        } else {
+            console.log('❌ Footer not found');
+        }
+    }
+    
+    // زمان‌بندی‌های مختلف را تست کنید:
+    // setTimeout(addStatsToFooter, 1000); // 1 ثانیه
+    // setTimeout(addStatsToFooter, 2000); // 2 ثانیه
+    document.addEventListener('DOMContentLoaded', addStatsToFooter); // بعد از لود کامل
+}
+
+
+    
 }
 
 // لودر صفحه
@@ -657,4 +695,5 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
