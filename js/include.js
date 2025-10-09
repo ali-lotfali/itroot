@@ -356,7 +356,7 @@ function initFooterScripts() {
 
 
     
-}
+
 
 // لودر صفحه
 function showLoader() {
@@ -695,5 +695,6 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
