@@ -163,18 +163,6 @@ const footerHTML = `
                         
                     </div>
                 </div>
-                
-
-                <!-- بخش آمار ------------------------------------------------------------------------------------------------------>
-   <!-- بخش آمار -->
-    <div class="footer-stats" style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid #eee;">
-        <h4 style="margin-bottom: 15px; color: #666;">📊 آمار بازدید itroot</h4>
-        <iframe src="https://visit-counter.ali-ir-th.workers.dev?page=footer" 
-                width="280" height="240"
-                style="border: none; border-radius: 10px; display: inline-block;">
-        </iframe>
-    </div>
-  <!-- بخش آمار ------------------------------------------------------------------------------------------------------>
                
             </div>
         </div>
@@ -302,6 +290,36 @@ function initFooterScripts() {
         });
     });
 
+
+
+        // 🔴 🔴 🔴 کد جدید اینجا قرار می‌گیرد 🔴 🔴 🔴
+    function addStatsToFooter() {
+        const footerStats = document.createElement('div');
+        footerStats.innerHTML = `
+            <div style="text-align: center; margin: 25px 0; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+                <h4 style="margin-bottom: 15px; color: #fff; opacity: 0.9;">📊 آمار بازدید itroot</h4>
+                <iframe src="https://visit-counter.ali-ir-th.workers.dev?page=footer" 
+                        width="280" height="240"
+                        style="border: none; border-radius: 10px; display: inline-block;">
+                </iframe>
+            </div>
+        `;
+        
+        const footer = document.querySelector('footer') || document.getElementById('footer-placeholder');
+        if (footer) {
+            footer.appendChild(footerStats);
+            console.log('✅ آمار به فوتر اضافه شد');
+        }
+    }
+    
+    setTimeout(addStatsToFooter, 500);
+    // 🔴 🔴 🔴 پایان کد جدید 🔴 🔴 🔴
+
+    
+
+
+
+    
     console.log(`✅ ${contactItems.length} contact items animated`);
 
 }
@@ -647,6 +665,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
