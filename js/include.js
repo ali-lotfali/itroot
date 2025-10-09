@@ -287,9 +287,6 @@ function initFooterScripts() {
             this.style.transform = 'translateX(0)';
         });
     });
-    
-    console.log(`✅ ${contactItems.length} contact items animated`);
-
 
     // 🔴 🔴 🔴 کد جدید: اضافه کردن آمار به فوتر 🔴 🔴 🔴
     function addStatsToFooter() {
@@ -317,6 +314,10 @@ function initFooterScripts() {
     // اجرای تابع بعد از لود کامل صفحه
     setTimeout(addStatsToFooter, 500);
     // 🔴 🔴 🔴 پایان کد جدید 🔴 🔴 🔴
+
+
+    
+    console.log(`✅ ${contactItems.length} contact items animated`);
 }
 
 // لودر صفحه
@@ -656,3 +657,4 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
