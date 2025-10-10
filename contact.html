@@ -59,73 +59,25 @@
         </section>
 
         <!-- فرم تماس -->
-        <section class="contact-form-section">
-            <div class="container">
-                <div class="form-container">
-                    <div class="form-header">
-                        <h2>درخواست خدمات یا مشاوره</h2>
-                        <p>فرم زیر را پر کنید تا در سریع‌ترین زمان با شما تماس بگیریم</p>
-                    </div>
-                    
-                    <form class="contact-form" id="serviceRequestForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">نام و نام خانوادگی *</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="company">نام شرکت</label>
-                                <input type="text" id="company" name="company">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="phone">شماره تماس *</label>
-                                <input type="tel" id="phone" name="phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">ایمیل</label>
-                                <input type="email" id="email" name="email">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">نوع خدمت مورد نیاز *</label>
-                            <select id="service" name="service" required>
-                                <option value="">انتخاب کنید</option>
-                                <option value="network">پشتیبانی شبکه</option>
-                                <option value="internet">خدمات اینترنت</option>
-                                <option value="security">امنیت اطلاعات</option>
-                                <option value="hardware">تعمیرات سخت‌افزار</option>
-                                <option value="software">نرم‌افزارهای اداری</option>
-                                <option value="consulting">مشاوره IT</option>
-                                <option value="other">سایر</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="urgency">میزان فوریت</label>
-                            <select id="urgency" name="urgency">
-                                <option value="low">کم (طی ۳ روز)</option>
-                                <option value="medium">متوسط (طی ۲۴ ساعت)</option>
-                                <option value="high">زیاد (فوری)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">توضیح مشکل یا درخواست *</label>
-                            <textarea id="message" name="message" rows="5" placeholder="لطفاً مشکل یا نیاز خود را به طور کامل شرح دهید..." required></textarea>
-                        </div>
-                        
-                        <div class="form-submit">
-                            <button type="submit" class="btn btn-primary">ارسال درخواست</button>
-                            <p class="form-note">پس از ارسال، همکاران ما حداکثر طی ۲ ساعت با شما تماس خواهند گرفت</p>
-                        </div>
-                    </form>
-                </div>
+         <!-- در صفحه contact.html -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>درخواست خدمات یا مشاوره</h2>
+                <p>فرم زیر را پر کنید تا در سریع‌ترین زمان با شما تماس بگیریم</p>
             </div>
-        </section>
+            
+            <!-- iframe برای نمایش فرم Worker -->
+            <iframe src="https://contact-form-handler.ali-ir-th.workers.dev" 
+                    width="100%" 
+                    height="800"
+                    style="border: none; border-radius: 10px;"
+                    scrolling="no">
+            </iframe>
+        </div>
+    </div>
+</section>
 
         <!-- سوالات متداول -->
         <section class="faq">
