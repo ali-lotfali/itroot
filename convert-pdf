@@ -1,1 +1,368 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درباره ما - خدمات کامپیوتری حرفه‌ای</title>
+    <meta name="description" content="درباره تیم خدمات کامپیوتری - ۱۰+ سال تجربه در ارائه خدمات تخصصی IT به شرکت‌های کوچک و متوسط">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- نوار بالایی -->
+<div id="header-placeholder"></div>
+
+    </header>
+
+    <!-- بخش اصلی -->
+    <main>
+        <!-- هیرو -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>درباره تیم خدمات کامپیوتری</h1>
+                    <p>۱۰+ سال تجربه در ارائه خدمات تخصصی IT به کسب‌وکارهای ایرانی</p>
+                </div>
+            </div>
+        </section>
+
+                <!-- CTA -->
+        <section class="cta">
+            <div class="container">
+                <h2>به خانواده مشتریان راضی ما بپیوندید</h2>
+                <p>همین حالا با ما تماس بگیرید و از خدمات حرفه‌ای IT بهره‌مند شوید</p>
+                <a href="contact.html" class="btn btn-primary">درخواست مشاوره رایگان</a>
+            </div>
+        </section>
+
+
+<body>
+    <div class="container">
+        <h1>📝 مبدل فایل - با پشتیبانی Word</h1>
+        
+        <div class="upload-container" id="dropZone">
+            <div class="upload-icon">📁</div>
+            <h3>فایل خود را اینجا رها کنید</h3>
+            <p>پشتیبانی از Word (DOCX), PDF, تصاویر و متن</p>
+            <input type="file" id="fileInput" accept=".docx,.pdf,.txt,.jpg,.jpeg,.png,.html" hidden>
+        </div>
+
+        <div class="file-info" id="fileInfo"></div>
+
+        <div class="options-section">
+            <h3 class="section-title">📄 فرمت خروجی:</h3>
+            <div class="format-grid" id="formatOptions">
+                <!-- فرمت‌ها به صورت داینامیک لود می‌شوند -->
+            </div>
+        </div>
+
+        <div class="word-warning" id="wordWarning" style="display: none;">
+            ⚠️ تبدیل Word ممکن است برخی فرمت‌بندی‌ها را حفظ نکند
+        </div>
+
+        <div class="error" id="errorMessage"></div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <button class="convert-btn" id="convertBtn">
+            🔄 شروع تبدیل
+        </button>
+
+        <a class="download-btn" id="downloadBtn" download>
+            ⬇️ دانلود فایل تبدیل شده
+        </a>
+    </div>
+
+    <script>
+        // تنظیم pdf.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        let selectedFile = null;
+        const { jsPDF } = window.jspdf;
+
+        // عناصر DOM
+        const elements = {
+            dropZone: document.getElementById('dropZone'),
+            fileInput: document.getElementById('fileInput'),
+            fileInfo: document.getElementById('fileInfo'),
+            formatOptions: document.getElementById('formatOptions'),
+            convertBtn: document.getElementById('convertBtn'),
+            progressBar: document.getElementById('progressBar'),
+            progress: document.getElementById('progress'),
+            status: document.getElementById('status'),
+            downloadBtn: document.getElementById('downloadBtn'),
+            errorMessage: document.getElementById('errorMessage'),
+            wordWarning: document.getElementById('wordWarning')
+        };
+
+        // فرمت‌های پشتیبانی شده با Word
+        const supportedConversions = {
+            // Word Documents
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['pdf', 'txt', 'html'],
+            
+            // تصاویر
+            'image/jpeg': ['pdf', 'txt'],
+            'image/png': ['pdf', 'txt'],
+            
+            // اسناد
+            'application/pdf': ['txt', 'html'],
+            'text/plain': ['pdf', 'html'],
+            'text/html': ['pdf', 'txt']
+        };
+
+        const formatNames = {
+            'pdf': 'PDF',
+            'txt': 'متن (TXT)',
+            'html': 'HTML'
+        };
+
+        // مدیریت آپلود فایل
+        elements.dropZone.addEventListener('click', () => elements.fileInput.click());
+        
+        elements.fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        elements.dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            elements.dropZone.style.background = '#f0f4ff';
+        });
+
+        elements.dropZone.addEventListener('dragleave', () => {
+            elements.dropZone.style.background = '';
+        });
+
+        elements.dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            elements.dropZone.style.background = '';
+            if (e.dataTransfer.files.length > 0) {
+                handleFileSelect(e.dataTransfer.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
+            selectedFile = file;
+            const fileSize = (file.size / 1024 / 1024).toFixed(2);
+            
+            elements.fileInfo.innerHTML = `
+                <strong>✅ فایل انتخاب شد:</strong><br>
+                📝 نام: ${file.name}<br>
+                💾 حجم: ${fileSize} MB<br>
+                🏷️ نوع: ${file.type || 'ناشناخته'}
+            `;
+            elements.fileInfo.style.display = 'block';
+            
+            // نمایش هشدار برای فایل‌های Word
+            if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
+                file.name.endsWith('.docx')) {
+                elements.wordWarning.style.display = 'block';
+            } else {
+                elements.wordWarning.style.display = 'none';
+            }
+            
+            loadAvailableFormats(file.type || getFileTypeFromName(file.name));
+            elements.convertBtn.disabled = false;
+            hideError();
+        }
+
+        function getFileTypeFromName(fileName) {
+            const ext = fileName.toLowerCase().split('.').pop();
+            const extensionMap = {
+                'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'pdf': 'application/pdf',
+                'txt': 'text/plain',
+                'html': 'text/html',
+                'jpg': 'image/jpeg',
+                'jpeg': 'image/jpeg',
+                'png': 'image/png'
+            };
+            return extensionMap[ext] || 'unknown';
+        }
+
+        function loadAvailableFormats(fileType) {
+            elements.formatOptions.innerHTML = '';
+            
+            const availableFormats = supportedConversions[fileType] || [];
+            
+            if (availableFormats.length === 0) {
+                showError('این نوع فایل پشتیبانی نمی‌شود');
+                elements.convertBtn.disabled = true;
+                return;
+            }
+
+            availableFormats.forEach(format => {
+                const label = document.createElement('label');
+                label.className = 'option-label';
+                label.innerHTML = `
+                    <input type="radio" name="format" value="${format}">
+                    ${formatNames[format]}
+                `;
+                elements.formatOptions.appendChild(label);
+            });
+
+            if (availableFormats.length > 0) {
+                elements.formatOptions.querySelector('input').checked = true;
+            }
+        }
+
+        // تبدیل فایل
+        elements.convertBtn.addEventListener('click', convertFile);
+
+        async function convertFile() {
+            if (!selectedFile) {
+                showError('لطفا یک فایل انتخاب کنید');
+                return;
+            }
+
+            const formatElement = document.querySelector('input[name="format"]:checked');
+            if (!formatElement) {
+                showError('لطفا فرمت خروجی را انتخاب کنید');
+                return;
+            }
+
+            const targetFormat = formatElement.value;
+            const fileType = selectedFile.type || getFileTypeFromName(selectedFile.name);
+
+            try {
+                elements.convertBtn.disabled = true;
+                elements.progressBar.style.display = 'block';
+                elements.status.style.display = 'block';
+                hideError();
+
+                await simulateProgress(30);
+
+                let convertedBlob;
+
+                // تبدیل Word به فرمت‌های دیگر
+                if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                    if (targetFormat === 'pdf') {
+                        convertedBlob = await convertDocxToPdf(selectedFile);
+                    } else if (targetFormat === 'txt') {
+                        convertedBlob = await convertDocxToText(selectedFile);
+                    } else if (targetFormat === 'html') {
+                        convertedBlob = await convertDocxToHtml(selectedFile);
+                    }
+                }
+                // سایر تبدیل‌ها
+                else if (fileType.startsWith('image/')) {
+                    if (targetFormat === 'pdf') {
+                        convertedBlob = await convertImageToPdf(selectedFile);
+                    } else if (targetFormat === 'txt') {
+                        convertedBlob = await convertImageToText(selectedFile);
+                    }
+                } else if (fileType === 'application/pdf') {
+                    if (targetFormat === 'txt') {
+                        convertedBlob = await convertPdfToText(selectedFile);
+                    } else if (targetFormat === 'html') {
+                        convertedBlob = await convertPdfToHtml(selectedFile);
+                    }
+                } else if (fileType === 'text/plain') {
+                    if (targetFormat === 'pdf') {
+                        convertedBlob = await convertTextToPdf(selectedFile);
+                    } else if (targetFormat === 'html') {
+                        convertedBlob = await convertTextToHtml(selectedFile);
+                    }
+                } else if (fileType === 'text/html') {
+                    if (targetFormat === 'pdf') {
+                        convertedBlob = await convertHtmlToPdf(selectedFile);
+                    } else if (targetFormat === 'txt') {
+                        convertedBlob = await convertHtmlToText(selectedFile);
+                    }
+                } else {
+                    throw new Error('این نوع تبدیل پشتیبانی نمی‌شود');
+                }
+
+                await simulateProgress(100);
+
+                // ایجاد لینک دانلود
+                const outputName = generateOutputName(selectedFile.name, targetFormat);
+                elements.downloadBtn.href = URL.createObjectURL(convertedBlob);
+                elements.downloadBtn.download = outputName;
+                elements.downloadBtn.style.display = 'block';
+                
+                elements.status.textContent = '✅ تبدیل با موفقیت انجام شد!';
+
+            } catch (error) {
+                console.error('خطا در تبدیل:', error);
+                showError('خطا در تبدیل فایل: ' + error.message);
+                elements.convertBtn.disabled = false;
+            }
+        }
+
+        // تبدیل‌های Word
+        async function convertDocxToText(docxFile) {
+            elements.status.textContent = 'در حال تبدیل Word به متن...';
+            
+            try {
+                // استفاده از Mammoth.js برای استخراج متن از DOCX
+                const arrayBuffer = await readFileAsArrayBuffer(docxFile);
+                const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
+                
+                if (result.value) {
+                    return new Blob([result.value], { type: 'text/plain; charset=utf-8' });
+                } else {
+                    throw new Error('نمی‌توان متن را از فایل Word استخراج کرد');
+                }
+            } catch (error) {
+                throw new Error('خطا در تبدیل Word: ' + error.message);
+            }
+        }
+
+        async function convertDocxToHtml(docxFile) {
+            elements.status.textContent = 'در حال تبدیل Word به HTML...';
+            
+            try {
+                const arrayBuffer = await readFileAsArrayBuffer(docxFile);
+                const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                
+                const htmlContent = `<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>سند تبدیل شده از Word</title>
+    <style>
+        body { 
+            font-family: Tahoma, Arial, sans-serif; 
+            line-height: 1.6; 
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        ${result.value}
+    </div>
+</body>
+
+
+
+
+
+
+
+
+    </main>
+
+    <!-- فوتر -->
+    <div id="footer-placeholder"></div>
+
+
+    <script src="js/include.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
 
