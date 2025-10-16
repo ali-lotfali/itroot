@@ -11,11 +11,12 @@ const headerHTML = `
         
         <nav class="nav">
             <a href="index.html">خانه</a>
-            <a href="online.html"> آنلاین</a>
+            
             <a href="services.html">خدمات ما</a>
+            <a href="online.html"> ابزارهای آنلاین</a>
             <a href="pricing.html">تعرفه‌ها</a>
             <a href="education.html">آموزش رایگان</a>
-            <a href="tools.html">ابزارهای رایگان</a>
+            <a href="tools.html">  ذانلود</a>
             <a href="about.html">درباره ما</a>
             <a href="contact.html">تماس با ما</a>
         </nav>
@@ -32,11 +33,12 @@ const headerHTML = `
 <!-- منوی موبایل -->
 <div class="mobile-menu">
     <a href="index.html">🏠 خانه</a>
-    <a href="online.html">🛠️ خانه</a>
+    
     <a href="services.html">🛠️ خدمات ما</a>
+    <a href="online.html">🛠️ ابزارهای آنلاین</a>
     <a href="pricing.html">💰 تعرفه‌ها</a>
     <a href="education.html">🎓 آموزش رایگان</a>
-    <a href="tools.html">🛠️ ابزارهای رایگان</a>
+    <a href="tools.html">🛠️ دانلود</a>
     <a href="about.html">👥 درباره ما</a>
     <a href="contact.html">📞 تماس با ما</a>
 </div>
@@ -645,6 +647,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
