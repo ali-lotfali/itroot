@@ -195,36 +195,7 @@
 <!-- امنیت اسکریپت -->
 <script>
 // محافظت فوری - همین الان اضافه کنید
-(function() {
-    const allowedDomain = 'site-shoma.ir'; // دامنه خودتان را وارد کنید
-    const currentDomain = window.location.hostname;
-    
-    if (currentDomain !== allowedDomain && !currentDomain.includes('localhost')) {
-        // اضافه کردن واترمارک
-        const watermark = document.createElement('div');
-        watermark.innerHTML = `
-            <div style="position: fixed; bottom: 10px; left: 10px; background: rgba(231, 76, 60, 0.9); 
-                       color: white; padding: 8px 12px; border-radius: 5px; font-size: 11px; z-index: 9999;">
-                ⚠️ کپی غیرمجاز | ابزار اصلی: <strong>site-shoma.ir</strong>
-            </div>
-        `;
-        document.body.appendChild(watermark);
-        
-        // محدود کردن عملکرد پس از 30 ثانیه
-        setTimeout(() => {
-            document.body.innerHTML = `
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; padding: 20px; text-align: center;">
-                    <h2 style="color: #e74c3c;">این ابزار غیرفعال شده است</h2>
-                    <p>برای استفاده از ابزار تست سرعت، لطفاً به سایت اصلی مراجعه کنید:</p>
-                    <a href="https://site-shoma.ir" style="font-size: 1.2em; color: #3498db; margin-top: 15px;">
-                        site-shoma.ir
-                    </a>
-                </div>
-            `;
-        }, 30000);
-    }
-})();
-</script>
+
 
 
 
