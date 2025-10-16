@@ -35,7 +35,7 @@ const headerHTML = `
     <a href="index.html">🏠 خانه</a>
     
     <a href="services.html">🛠️ خدمات ما</a>
-    <a href="online.html">🛠️ ابزارهای آنلاین</a>
+    <a href="tools-online.html">🛠️ ابزارهای آنلاین</a>
     <a href="pricing.html">💰 تعرفه‌ها</a>
     <a href="education.html">🎓 آموزش رایگان</a>
     <a href="tools.html">🛠️ دانلود</a>
@@ -647,6 +647,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
