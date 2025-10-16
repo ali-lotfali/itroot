@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ابزارهای رایگان - دانلود نرم‌افزارهای کاربردی IT</title>
+    <meta name="description" content="دانلود رایگان نرم‌افزارهای ضروری IT شامل AnyDesk, TeamViewer, CCleaner, HWMonitor و سایر ابزارهای کاربردی">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* استایل‌های تست سرعت */
+        .speedtest-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            margin: 40px 0;
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .speedtest-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 0 auto;
+            max-width: 500px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .speedtest-title {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+        }
+        
+        .speed-circle {
+            width: 200px;
+            height: 200px;
+            border: 10px solid #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: conic-gradient(#3498db 0deg, #f0f0f0 0deg);
+            transition: background 0.5s ease;
+        }
+        
+        .speed-inner {
+            width: 170px;
+            height: 170px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .speed-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+        
+        .speed-unit {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .test-btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .test-btn:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+            transform: scale(1.05);
+        }
+        
+        .test-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .status.waiting {
+            background: #e8f4fd;
+            color: #3498db;
+            border: 2px solid #3498db;
+        }
+        
+        .status.testing {
+            background: #fff9e6;
+            color: #f39c12;
+            border: 2px solid #f39c12;
+        }
+        
+        .status.complete {
+            background: #d4f8e8;
+            color: #27ae60;
+            border: 2px solid #2ecc71;
+        }
+        
+        .status.error {
+            background: #fdeaea;
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        
+        .results {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .result-label {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .result-value {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .speed-quality {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .quality-excellent { background: #d4f8e8; color: #27ae60; }
+        .quality-good { background: #fff9e6; color: #f39c12; }
+        .quality-average { background: #fdeaea; color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <!-- نوار بالایی -->
+    <div id="header-placeholder"></div>
+    
+    <!-- بخش اصلی -->
+    <main>
+        <!-- هیرو -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>ابزارهای رایگان IT</h1>
+                    <p>مجموعه‌ای کامل از نرم‌افزارهای ضروری برای مدیریت و عیب‌یابی سیستم</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="number">۲۰+</span>
+                            <span class="label">نرم‌افزار کاربردی</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">۱۰۰%</span>
+                            <span class="label">رایگان</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">✅</span>
+                            <span class="label">اسکن امنیتی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- تست سرعت اینترنت -->
+        <section class="speedtest-section">
+            <div class="container">
+                <div class="speedtest-container">
+                    <h2 class="speedtest-title">🚀 تست سرعت اینترنت</h2>
+                    
+                    <div class="speed-circle" id="speedCircle">
+                        <div class="speed-inner">
+                            <div class="speed-value" id="speedValue">0</div>
+                            <div class="speed-unit">Mbps</div>
+                        </div>
+                    </div>
+                    
+                    <button class="test-btn" onclick="startSpeedTest()" id="testBtn">
+                        شروع تست سرعت
+                    </button>
+                    
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    
+                    <div class="status waiting" id="status">
+                        برای شروع تست سرعت، دکمه بالا را فشار دهید
+                    </div>
+                    
+                    <div class="results" id="results">
+                        <div class="result-item">
+                            <span class="result-label">سرعت دانلود:</span>
+                            <span class="result-value" id="downloadResult">0 Mbps</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">زمان تست:</span>
+                            <span class="result-value" id="timeResult">0 ثانیه</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">حجم داده:</span>
+                            <span class="result-value" id="dataResult">0 MB</span>
+                        </div>
+                        <div class="speed-quality" id="speedQuality"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- هشدار امنیتی -->
+        <section class="security-section">
+            <div class="container">
+                <div class="security-alert">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <h3>توجه: نکات امنیتی دانلود</h3>
+                        <ul>
+                            <li>✅ تمامی فایل‌ها از سایت‌های رسمی توسعه‌دهندگان دانلود شده‌اند</li>
+                            <li>✅ فایل‌ها توسط آنتی‌ویروس اسکن شده‌اند</li>
+                            <li>✅ برای اطمینان بیشتر از لینک‌های سایت رسمی استفاده کنید</li>
+                            <li>✅ از دانلود نرم‌افزار از سایت‌های غیرمعتبر خودداری کنید</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/include.js"></script>
+    <script src="js/script.js"></script>
+    
+    <script>
+        // کد JavaScript تست سرعت
+        let testRunning = false;
+        let startTime;
+        let totalDownloaded = 0;
+
+        function startSpeedTest() {
+            if (testRunning) return;
+            
+            testRunning = true;
+            const btn = document.getElementById('testBtn');
+            const status = document.getElementById('status');
+            const progressBar = document.getElementById('progressBar');
+            const progress = document.getElementById('progress');
+            const results = document.getElementById('results');
+            const speedCircle = document.getElementById('speedCircle');
+            const speedValue = document.getElementById('speedValue');
+            
+            // ریست کردن مقادیر
+            btn.disabled = true;
+            btn.textContent = 'در حال تست سرعت...';
+            status.className = 'status testing';
+            status.textContent = 'در حال آماده‌سازی تست...';
+            progressBar.style.display = 'block';
+            progress.style.width = '0%';
+            results.style.display = 'none';
+            speedValue.textContent = '0';
+            speedCircle.style.background = 'conic-gradient(#3498db 0deg, #f0f0f0 0deg)';
+            totalDownloaded = 0;
+            startTime = performance.now();
+            
+            // شروع تست سرعت
+            runSpeedTest();
+        }
+
+        async function runSpeedTest() {
+            const speedValue = document.getElementById('speedValue');
+            const progress = document.getElementById('progress');
+            const speedCircle = document.getElementById('speedCircle');
+            
+            try {
+                const testFiles = [
+                    {
+                        name: "فایل تست 1",
+                        url: "https://httpbin.org/bytes/1048576", // 1MB
+                        size: 1048576
+                    },
+                    {
+                        name: "فایل تست 2", 
+                        url: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
+                        size: 200000
+                    }
+                ];
+
+                let totalSpeed = 0;
+                let successfulTests = 0;
+
+                for (let i = 0; i < testFiles.length; i++) {
+                    if (!testRunning) break;
+                    
+                    const file = testFiles[i];
+                    status.textContent = `در حال تست سرعت... (${i + 1}/${testFiles.length})`;
+                    
+                    const progressPercent = (i / testFiles.length) * 100;
+                    progress.style.width = progressPercent + '%';
+                    
+                    const speed = await downloadAndMeasureSpeed(file.url, file.size);
+                    
+                    if (speed > 0) {
+                        totalSpeed += speed;
+                        successfulTests++;
+                        
+                        const currentSpeed = (totalSpeed / successfulTests).toFixed(1);
+                        speedValue.textContent = currentSpeed;
+                        
+                        totalDownloaded += file.size;
+                        
+                        const circleProgress = ((i + 1) / testFiles.length) * 100;
+                        const circleDegrees = (circleProgress / 100) * 360;
+                        speedCircle.style.background = `conic-gradient(#3498db ${circleDegrees}deg, #f0f0f0 ${circleDegrees}deg)`;
+                    }
+                }
+                
+                if (successfulTests > 0) {
+                    const averageSpeed = totalSpeed / successfulTests;
+                    completeTest(averageSpeed);
+                } else {
+                    const backupSpeed = await backupSpeedTest();
+                    if (backupSpeed > 0) {
+                        completeTest(backupSpeed);
+                    } else {
+                        completeTest(0, true);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('خطا در تست سرعت:', error);
+                completeTest(0, true);
+            }
+        }
+
+        async function downloadAndMeasureSpeed(url, expectedSize) {
+            return new Promise((resolve) => {
+                const xhr = new XMLHttpRequest();
+                const startTime = performance.now();
+                
+                xhr.open('GET', url + '?cache=' + Date.now(), true);
+                xhr.responseType = 'blob';
+                
+                xhr.onprogress = function(event) {
+                    if (testRunning && event.lengthComputable) {
+                        const currentTime = performance.now();
+                        const elapsedTime = (currentTime - startTime) / 1000;
+                        const downloadedBytes = event.loaded;
+                        
+                        if (elapsedTime > 0.5) {
+                            const speedMbps = (downloadedBytes * 8) / (elapsedTime * 1024 * 1024);
+                            document.getElementById('speedValue').textContent = speedMbps.toFixed(1);
+                        }
+                    }
+                };
+                
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        const endTime = performance.now();
+                        const duration = (endTime - startTime) / 1000;
+                        const speedMbps = (expectedSize * 8) / (duration * 1024 * 1024);
+                        resolve(speedMbps);
+                    } else {
+                        resolve(0);
+                    }
+                };
+                
+                xhr.onerror = function() {
+                    resolve(0);
+                };
+                
+                xhr.ontimeout = function() {
+                    resolve(0);
+                };
+                
+                xhr.timeout = 10000;
+                xhr.send();
+            });
+        }
+
+        async function backupSpeedTest() {
+            return new Promise((resolve) => {
+                const imageUrls = [
+                    'https://picsum.photos/500/500?random=1',
+                    'https://picsum.photos/500/500?random=2'
+                ];
+                
+                let totalSpeed = 0;
+                let completedTests = 0;
+                
+                imageUrls.forEach((url, index) => {
+                    const img = new Image();
+                    const startTime = performance.now();
+                    
+                    img.onload = function() {
+                        const endTime = performance.now();
+                        const duration = (endTime - startTime) / 1000;
+                        const estimatedSize = 200 * 1024;
+                        const speedMbps = (estimatedSize * 8) / (duration * 1024 * 1024);
+                        
+                        totalSpeed += speedMbps;
+                        completedTests++;
+                        
+                        if (completedTests === imageUrls.length) {
+                            resolve(totalSpeed / completedTests);
+                        }
+                    };
+                    
+                    img.onerror = function() {
+                        completedTests++;
+                        if (completedTests === imageUrls.length) {
+                            resolve(totalSpeed / Math.max(1, completedTests));
+                        }
+                    };
+                    
+                    setTimeout(() => {
+                        img.src = url + '&t=' + Date.now();
+                    }, index * 1000);
+                });
+                
+                setTimeout(() => {
+                    if (completedTests < imageUrls.length) {
+                        resolve(totalSpeed / Math.max(1, completedTests));
+                    }
+                }, 10000);
+            });
+        }
+
+        function completeTest(finalSpeed, error = false) {
+            testRunning = false;
+            const btn = document.getElementById('testBtn');
+            const status = document.getElementById('status');
+            const progressBar = document.getElementById('progressBar');
+            const results = document.getElementById('results');
+            const speedCircle = document.getElementById('speedCircle');
+            const speedValue = document.getElementById('speedValue');
+            const endTime = performance.now();
+            
+            const totalTime = ((endTime - startTime) / 1000).toFixed(1);
+            const totalDataMB = (totalDownloaded / (1024 * 1024)).toFixed(2);
+            
+            if (error || finalSpeed === 0) {
+                status.className = 'status error';
+                status.textContent = 'خطا در اتصال به سرور تست. لطفاً مجدداً تلاش کنید.';
+                btn.disabled = false;
+                btn.textContent = 'تلاش مجدد';
+                speedValue.textContent = '0';
+                speedCircle.style.background = 'conic-gradient(#e74c3c 360deg, #f0f0f0 360deg)';
+                return;
+            }
+            
+            speedValue.textContent = finalSpeed.toFixed(1);
+            document.getElementById('downloadResult').textContent = finalSpeed.toFixed(1) + ' Mbps';
+            document.getElementById('timeResult').textContent = totalTime + ' ثانیه';
+            document.getElementById('dataResult').textContent = totalDataMB + ' MB';
+            
+            const qualityElement = document.getElementById('speedQuality');
+            let qualityText = '';
+            let qualityClass = '';
+            
+            if (finalSpeed >= 25) {
+                qualityText = '✅ سرعت عالی - مناسب برای استریم و دانلود';
+                qualityClass = 'quality-excellent';
+            } else if (finalSpeed >= 10) {
+                qualityText = '👍 سرعت خوب - مناسب برای وب‌گردی';
+                qualityClass = 'quality-good';
+            } else if (finalSpeed >= 5) {
+                qualityText = '⚠️ سرعت متوسط - ممکن است در برخی موارد کند باشد';
+                qualityClass = 'quality-average';
+            } else {
+                qualityText = '❌ سرعت پایین - بررسی اتصال اینترنت توصیه می‌شود';
+                qualityClass = 'quality-average';
+            }
+            
+            qualityElement.textContent = qualityText;
+            qualityElement.className = 'speed-quality ' + qualityClass;
+            
+            status.className = 'status complete';
+            status.textContent = 'تست سرعت با موفقیت تکمیل شد';
+            results.style.display = 'block';
+            progress.style.width = '100%';
+            
+            btn.disabled = false;
+            btn.textContent = 'انجام تست مجدد';
+            
+            speedCircle.style.background = 'conic-gradient(#2ecc71 360deg, #f0f0f0 360deg)';
+        }
+
+        function animateWaitingCircle() {
+            const speedCircle = document.getElementById('speedCircle');
+            let angle = 0;
+            
+            const animation = setInterval(() => {
+                if (!testRunning) {
+                    angle = (angle + 2) % 360;
+                    speedCircle.style.background = `conic-gradient(#3498db ${angle}deg, #f0f0f0 ${angle}deg)`;
+                }
+            }, 50);
+        }
+
+        window.addEventListener('load', animateWaitingCircle);
+    </script>
+</body>
+</html>
