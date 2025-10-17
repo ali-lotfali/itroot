@@ -180,6 +180,14 @@ const footerHTML = `
                 <div class="copyright">
                     <p>&copy; ۱۴۰۳ - خدمات کامپیوتری. تمامی حقوق محفوظ است.</p>
                 </div>
+
+                <!-- 🔽🔽🔽 اینجا کد Analytics را قرار دهید 🔽🔽🔽 -->
+                <!-- Cloudflare Web Analytics -->
+                <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f6a9db7751624ece96e0b357f59ae639"}'></script>
+                <!-- End Cloudflare Web Analytics -->
+                <!-- 🔼🔼🔼 اینجا کد Analytics را قرار دهید 🔼🔼🔼 -->
+
+
                 
                 <div class="footer-bottom-links">
                     <a href="privacy.html">حریم خصوصی</a>
@@ -647,6 +655,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
