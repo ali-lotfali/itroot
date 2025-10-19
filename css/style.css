@@ -80,6 +80,14 @@ body {
     text-align: center;
 }
 
+.hero-slither {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+
+    text-align: center;
+}
+
+
 .hero-content h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
