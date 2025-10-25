@@ -3,9 +3,9 @@ const headerHTML = `
 <header class="header">
     <div class="container">
         <div class="logo">
-            <a href="index.html">
+            <a href="index.html" style="text-decoration: none;">
                 <h2>🖥️ خدمات کامپیوتری</h2>
-                <span class="tagline">پشتیبانی تخصصی IT</span>
+                <span class="tagline">itroot</span>
             </a>
         </div>
         
@@ -655,6 +655,7 @@ document.head.appendChild(style);
 
 
 console.log('✅ Header and Footer system ready!');
+
 
 
 
