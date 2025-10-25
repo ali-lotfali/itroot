@@ -57,12 +57,23 @@
 
     <script src="js/include.js"></script>
     <script src="js/script.js"></script>
+    
     <!--ماژول سرچ اسکریپت‌ها -->
     <script src="js/tools-data.js"></script>
     <script src="js/tools-module.js"></script>
+        <script>
+        // راه‌اندازی ماژول
+        document.addEventListener('DOMContentLoaded', function() {
+            window.toolsApp = new ToolsModule('tools-container', toolsData);
+        });
+    </script>
+    <!--ماژول سرچ اسکریپت‌ها پایان -->
+
+    
     
 </body>
 
 </html>
+
 
 
