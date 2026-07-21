@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>نمایش IP کامپیوتر</title>
-  <!-- Font Awesome برای آیکون دگمه (اختیاری) -->
+  <title>نمایش IP واقعی کامپیوتر</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -15,114 +15,128 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(145deg, #f6f8fc 0%, #e9eef4 100%);
+      background: linear-gradient(145deg, #f0f4fa 0%, #dce3ed 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 1.5rem;
-      direction: rtl; /* پشتیبانی از زبان فارسی */
+      direction: rtl;
     }
 
     .workflow-card {
-      max-width: 600px;
+      max-width: 700px;
       width: 100%;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 2rem;
       padding: 2.5rem 2rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.25s ease;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       text-align: center;
     }
 
-    .workflow-card:hover {
-      box-shadow: 0 30px 55px rgba(0, 0, 0, 0.18);
-      transform: translateY(-3px);
-    }
-
     h1 {
-      font-size: 1.9rem;
-      font-weight: 600;
-      color: #1a2639;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.5px;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0b1a2b;
+      margin-bottom: 0.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     h1 i {
-      color: #2a6f97;
-      font-size: 2rem;
+      color: #1e6f9f;
     }
 
     .subtitle {
-      color: #3e4e62;
-      font-size: 1rem;
-      margin-bottom: 2.2rem;
-      border-bottom: 2px dashed #b6c8d9;
-      padding-bottom: 0.8rem;
-      opacity: 0.8;
+      color: #3d5a78;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px dashed #b8ccdf;
+      padding-bottom: 0.7rem;
     }
 
-    .ip-display-box {
+    .ip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 550px) {
+      .ip-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ip-box {
       background: #0b1a2b;
-      border-radius: 1.6rem;
-      padding: 1.8rem 1rem;
-      margin-bottom: 2.2rem;
-      box-shadow: inset 0 5px 10px rgba(0,0,0,0.5), 0 8px 18px rgba(0, 20, 40, 0.3);
-      border: 1px solid #2f4560;
-      transition: all 0.3s;
+      border-radius: 1.4rem;
+      padding: 1.2rem 0.8rem;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.6), 0 8px 20px rgba(0, 20, 40, 0.3);
+      border: 1px solid #2a4560;
+      transition: all 0.2s;
     }
 
-    .ip-display-box .ip-label {
-      font-size: 0.9rem;
+    .ip-box:hover {
+      transform: scale(1.02);
+      border-color: #4a8ab5;
+    }
+
+    .ip-box .label {
+      font-size: 0.8rem;
       color: #8ba3c7;
-      letter-spacing: 1px;
       text-transform: uppercase;
+      letter-spacing: 1px;
       font-weight: 400;
       display: block;
       margin-bottom: 6px;
     }
 
-    .ip-address {
-      font-size: 2.5rem;
+    .ip-box .label i {
+      margin-left: 6px;
+    }
+
+    .ip-value {
+      font-size: 1.5rem;
       font-weight: 700;
       font-family: 'Courier New', monospace;
       color: #b9e6ff;
-      word-break: break-word;
-      text-shadow: 0 0 12px rgba(70, 170, 255, 0.4);
-      letter-spacing: 1px;
-      min-height: 4rem;
+      word-break: break-all;
+      min-height: 3rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      text-shadow: 0 0 15px rgba(70, 170, 255, 0.3);
     }
 
-    .ip-address i {
-      font-size: 1.8rem;
-      color: #4c9aff;
-      opacity: 0.7;
-    }
-
-    .ip-placeholder {
+    .ip-value .placeholder {
       color: #5f7b9c;
       font-weight: 400;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+    }
+
+    .ip-value .local-ip-badge {
+      background: #1d8a4f;
+      color: #d4ffdd;
+      font-size: 0.6rem;
+      padding: 2px 10px;
+      border-radius: 30px;
+      font-weight: 600;
       letter-spacing: 0.5px;
     }
 
     .btn-ip {
       background: #1b3b5a;
       border: none;
-      padding: 1rem 2.2rem;
+      padding: 1rem 2.5rem;
       border-radius: 60px;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: #f0f9ff;
       cursor: pointer;
@@ -130,28 +144,27 @@
       align-items: center;
       justify-content: center;
       gap: 14px;
-      transition: 0.2s ease;
-      box-shadow: 0 8px 0 #0d2233, 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: 0.15s ease;
+      box-shadow: 0 8px 0 #0d2233, 0 10px 25px rgba(0, 0, 0, 0.25);
       border: 1px solid #3e6a8f;
       width: 100%;
-      max-width: 280px;
+      max-width: 320px;
       margin: 0 auto 0.5rem;
     }
 
     .btn-ip i {
-      font-size: 1.5rem;
       color: #9bc9ff;
     }
 
     .btn-ip:hover {
       background: #254f72;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 0 #0d2233, 0 16px 28px rgba(0, 0, 0, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 0 #0d2233, 0 18px 30px rgba(0, 0, 0, 0.3);
     }
 
     .btn-ip:active {
       transform: translateY(6px);
-      box-shadow: 0 2px 0 #0d2233, 0 10px 18px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 0 #0d2233;
     }
 
     .btn-ip:disabled {
@@ -162,59 +175,40 @@
     }
 
     .status-message {
-      margin-top: 1.5rem;
+      margin-top: 1.2rem;
       font-size: 0.9rem;
-      color: #2a4b6e;
+      color: #1e4060;
       background: rgba(60, 130, 200, 0.08);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.2rem;
       border-radius: 40px;
       display: inline-block;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(60, 130, 200, 0.15);
+      border: 1px solid rgba(60, 130, 200, 0.12);
     }
 
     .status-message i {
       margin-left: 8px;
-      color: #2a7faa;
     }
 
     .footer-note {
-      margin-top: 1.8rem;
+      margin-top: 1.5rem;
       font-size: 0.75rem;
-      color: #5a6f86;
+      color: #5f748b;
       opacity: 0.7;
     }
 
-    /* حالت در حال بارگذاری */
     .loading-spinner {
       display: inline-block;
-      width: 1.8rem;
-      height: 1.8rem;
-      border: 3px solid rgba(255, 255, 255, 0.2);
+      width: 1.6rem;
+      height: 1.6rem;
+      border: 3px solid rgba(255,255,255,0.15);
       border-top: 3px solid #7bb3ff;
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-left: 8px;
+      animation: spin 0.7s linear infinite;
     }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-    }
-
-    /* واکنش‌گرایی */
-    @media (max-width: 480px) {
-      .workflow-card {
-        padding: 1.8rem 1rem;
-      }
-      .ip-address {
-        font-size: 1.8rem;
-      }
-      .btn-ip {
-        font-size: 1.1rem;
-        padding: 0.8rem 1.5rem;
-        max-width: 220px;
-      }
     }
   </style>
 </head>
@@ -222,27 +216,36 @@
 
 <div class="workflow-card">
   <h1>
-    <i class="fas fa-network-wired"></i> 
-    نمایش IP
+    <i class="fas fa-microchip"></i> 
+    IP واقعی کامپیوتر
   </h1>
-  <div class="subtitle">کامپیوتر شما • دریافت آدرس عمومی</div>
+  <div class="subtitle">نمایش آدرس IP محلی (واقعی) + IP عمومی</div>
 
-  <!-- بخش نمایش IP -->
-  <div class="ip-display-box">
-    <span class="ip-label"><i class="fas fa-globe"></i> آدرس IP عمومی</span>
-    <div id="ipAddress" class="ip-address">
-      <i class="fas fa-circle-notch fa-spin" style="font-size: 1.4rem; opacity: 0.5;"></i>
-      <span class="ip-placeholder">دریافت نشده</span>
+  <div class="ip-grid">
+    <!-- IP محلی (واقعی) -->
+    <div class="ip-box">
+      <span class="label"><i class="fas fa-laptop"></i> IP محلی (واقعی)</span>
+      <div id="localIp" class="ip-value">
+        <i class="fas fa-circle-notch fa-spin" style="color: #4a8ab5; font-size: 1.2rem;"></i>
+        <span class="placeholder">دریافت نشده</span>
+      </div>
+    </div>
+
+    <!-- IP عمومی -->
+    <div class="ip-box">
+      <span class="label"><i class="fas fa-globe"></i> IP عمومی</span>
+      <div id="publicIp" class="ip-value">
+        <i class="fas fa-circle-notch fa-spin" style="color: #4a8ab5; font-size: 1.2rem;"></i>
+        <span class="placeholder">دریافت نشده</span>
+      </div>
     </div>
   </div>
 
-  <!-- دگمه اصلی -->
   <button id="fetchIpBtn" class="btn-ip">
     <i class="fas fa-sync-alt"></i> 
-    نمایش IP کامپیوتر
+    نمایش IP واقعی
   </button>
 
-  <!-- وضعیت/خطا -->
   <div id="statusMessage" class="status-message">
     <i class="fas fa-info-circle"></i> 
     برای دریافت IP کلیک کنید
@@ -250,110 +253,178 @@
 
   <div class="footer-note">
     <i class="fas fa-shield-alt"></i> 
-    اطلاعات صرفاً از سرویس عمومی ipify دریافت می‌شود
+    IP محلی از WebRTC و IP عمومی از ipify دریافت می‌شود
   </div>
 </div>
 
 <script>
   (function() {
-    // عناصر DOM
-    const ipDisplay = document.getElementById('ipAddress');
+    const localIpDisplay = document.getElementById('localIp');
+    const publicIpDisplay = document.getElementById('publicIp');
     const fetchBtn = document.getElementById('fetchIpBtn');
     const statusMsg = document.getElementById('statusMessage');
 
-    // تابع کمکی برای به‌روزرسانی وضعیت
     function setStatus(text, type = 'info') {
       statusMsg.innerHTML = '';
       const icon = document.createElement('i');
-      if (type === 'info') {
-        icon.className = 'fas fa-info-circle';
-        statusMsg.style.color = '#2a4b6e';
-      } else if (type === 'success') {
-        icon.className = 'fas fa-check-circle';
-        statusMsg.style.color = '#1b7a3d';
-      } else if (type === 'error') {
-        icon.className = 'fas fa-exclamation-triangle';
-        statusMsg.style.color = '#b13e3e';
-      } else if (type === 'loading') {
-        icon.className = 'fas fa-spinner fa-pulse';
-        statusMsg.style.color = '#2a6f97';
-      }
+      const colors = {
+        info: '#1e4060',
+        success: '#1b7a3d',
+        error: '#b13e3e',
+        loading: '#1e6f9f'
+      };
+      const icons = {
+        info: 'fa-info-circle',
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-triangle',
+        loading: 'fa-spinner fa-pulse'
+      };
+      icon.className = `fas ${icons[type] || icons.info}`;
+      statusMsg.style.color = colors[type] || colors.info;
       statusMsg.appendChild(icon);
       statusMsg.appendChild(document.createTextNode(' ' + text));
     }
 
-    // تابع اصلی دریافت IP
-    async function fetchIp() {
-      // غیرفعال کردن دگمه در حین درخواست
+    // دریافت IP محلی از طریق WebRTC
+    function getLocalIP() {
+      return new Promise((resolve, reject) => {
+        // ایجاد Connection برای دریافت IP
+        const pc = new RTCPeerConnection({
+          iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        });
+
+        pc.createDataChannel('');
+
+        pc.createOffer()
+          .then(offer => pc.setLocalDescription(offer))
+          .catch(err => reject(err));
+
+        let localIP = null;
+
+        pc.onicecandidate = (event) => {
+          if (event.candidate) {
+            const candidate = event.candidate.candidate;
+            // استخراج IP از رشته candidate
+            const ipRegex = /([0-9]{1,3}\.){3}[0-9]{1,3}/;
+            const match = candidate.match(ipRegex);
+            if (match) {
+              localIP = match[0];
+              // فیلتر کردن IPهای محلی (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+              const parts = localIP.split('.');
+              const firstOctet = parseInt(parts[0]);
+              const secondOctet = parseInt(parts[1]);
+              if (
+                (firstOctet === 192 && secondOctet === 168) ||
+                (firstOctet === 10) ||
+                (firstOctet === 172 && secondOctet >= 16 && secondOctet <= 31)
+              ) {
+                // IP معتبر محلی پیدا شد
+                pc.close();
+                resolve(localIP);
+              }
+            }
+          }
+        };
+
+        // زمان‌آوت برای جلوگیری از گیر کردن
+        setTimeout(() => {
+          pc.close();
+          if (localIP) {
+            resolve(localIP);
+          } else {
+            reject(new Error('IP محلی پیدا نشد'));
+          }
+        }, 5000);
+      });
+    }
+
+    // دریافت IP عمومی
+    async function getPublicIP() {
+      const response = await fetch('https://api.ipify.org?format=json', {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      return data.ip;
+    }
+
+    // تابع اصلی دریافت هر دو IP
+    async function fetchAllIPs() {
       fetchBtn.disabled = true;
       fetchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> در حال دریافت...';
+      setStatus('در حال دریافت IPها ...', 'loading');
 
       // نمایش وضعیت در حال بارگذاری
-      setStatus('در حال دریافت آدرس IP ...', 'loading');
-
-      // تغییر نمایش IP به حالت waiting
-      ipDisplay.innerHTML = `
-        <i class="fas fa-circle-notch fa-spin" style="font-size: 1.6rem; opacity: 0.6;"></i>
-        <span class="ip-placeholder">دریافت ...</span>
+      localIpDisplay.innerHTML = `
+        <i class="fas fa-circle-notch fa-spin" style="color: #4a8ab5; font-size: 1.2rem;"></i>
+        <span class="placeholder">دریافت ...</span>
+      `;
+      publicIpDisplay.innerHTML = `
+        <i class="fas fa-circle-notch fa-spin" style="color: #4a8ab5; font-size: 1.2rem;"></i>
+        <span class="placeholder">دریافت ...</span>
       `;
 
       try {
-        // استفاده از API عمومی ipify (با پشتیبانی از IPv4 و IPv6)
-        // برای اطمینان از دریافت IPv4 از مسیر ?format=json استفاده می‌کنیم
-        const response = await fetch('https://api.ipify.org?format=json', {
-          method: 'GET',
-          headers: { 'Accept': 'application/json' }
-        });
+        // دریافت هر دو IP به صورت همزمان
+        const [localIP, publicIP] = await Promise.all([
+          getLocalIP(),
+          getPublicIP()
+        ]);
 
-        if (!response.ok) {
-          throw new Error(`خطای HTTP ${response.status} - ${response.statusText}`);
-        }
+        // نمایش IP محلی
+        localIpDisplay.innerHTML = `
+          <i class="fas fa-network-wired" style="color: #6db3ff; font-size: 1.3rem;"></i>
+          <span>${localIP}</span>
+          <span class="local-ip-badge">واقعی</span>
+        `;
 
-        const data = await response.json();
-        
-        // بررسی وجود ip در پاسخ
-        if (data && data.ip) {
-          const ip = data.ip;
-          // نمایش IP زیبا
-          ipDisplay.innerHTML = `
-            <i class="fas fa-wifi" style="font-size: 1.8rem; color: #6db3ff;"></i>
-            <span style="margin-left: 6px;">${ip}</span>
-          `;
-          setStatus(`IP دریافت شد: ${ip}`, 'success');
-        } else {
-          throw new Error('پاسخ API فاقد آدرس IP است');
-        }
+        // نمایش IP عمومی
+        publicIpDisplay.innerHTML = `
+          <i class="fas fa-globe" style="color: #6db3ff; font-size: 1.3rem;"></i>
+          <span>${publicIP}</span>
+        `;
+
+        setStatus(`✅ IP محلی: ${localIP} | IP عمومی: ${publicIP}`, 'success');
 
       } catch (error) {
-        // خطا: نمایش پیام خطا در باکس IP و وضعیت
-        console.error('خطا در دریافت IP:', error);
-        ipDisplay.innerHTML = `
-          <i class="fas fa-exclamation-circle" style="color: #ff8a8a; font-size: 2rem;"></i>
-          <span style="color: #ffb3b3; font-size: 1.1rem; margin-left: 6px;">خطا در دریافت</span>
+        console.error('خطا:', error);
+        
+        // اگر IP محلی دریافت نشد
+        if (error.message.includes('محلی')) {
+          localIpDisplay.innerHTML = `
+            <i class="fas fa-exclamation-circle" style="color: #ff8a8a;"></i>
+            <span style="color: #ffb3b3; font-size: 0.9rem;">دریافت نشد</span>
+          `;
+        } else {
+          localIpDisplay.innerHTML = `
+            <i class="fas fa-exclamation-circle" style="color: #ff8a8a;"></i>
+            <span style="color: #ffb3b3; font-size: 0.9rem;">خطا</span>
+          `;
+        }
+
+        // اگر IP عمومی دریافت نشد
+        publicIpDisplay.innerHTML = `
+          <i class="fas fa-exclamation-circle" style="color: #ff8a8a;"></i>
+          <span style="color: #ffb3b3; font-size: 0.9rem;">خطا در دریافت</span>
         `;
-        setStatus(`خطا: ${error.message || 'مشکل در ارتباط با سرور'}`, 'error');
+
+        setStatus(`❌ خطا: ${error.message || 'مشکل در ارتباط'}`, 'error');
+
       } finally {
-        // فعال کردن دگمه و برگرداندن متن آن
         fetchBtn.disabled = false;
-        fetchBtn.innerHTML = '<i class="fas fa-sync-alt"></i> نمایش IP کامپیوتر';
+        fetchBtn.innerHTML = '<i class="fas fa-sync-alt"></i> نمایش IP واقعی';
       }
     }
 
-    // افزودن event listener به دگمه
-    fetchBtn.addEventListener('click', fetchIp);
+    fetchBtn.addEventListener('click', fetchAllIPs);
 
-    // (اختیاری) اجرای خودکار برای نمایش IP هنگام بارگذاری صفحه
-    // غیرفعال کردن خودکار برای رعایت تجربه کاربری (با دگمه انجام می‌شود)
-    // ولی اگر بخواهید یکبار خودکار نمایش دهد، خط زیر را فعال کنید:
-    // fetchIp();
-
-    // نمایش راهنما در حالت اولیه
-    setStatus('برای دریافت IP روی دگمه کلیک کنید', 'info');
+    // پیام اولیه
+    setStatus('برای دریافت IP واقعی (محلی) کلیک کنید', 'info');
   })();
 </script>
 
-<!-- توضیح: این کد یک ورکفلور ساده با دگمه نمایش IP است.
-     از API عمومی ipify.org برای دریافت IP استفاده می‌کند.
-     کاملاً ریسپانسیو، دارای افکت‌های مدرن و حالت‌های خطا/بارگذاری. -->
 </body>
 </html>
